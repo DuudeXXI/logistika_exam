@@ -1,0 +1,206 @@
+@import "~bootstrap/scss/bootstrap";
+
+.line_content{
+    padding-bottom: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .product_info_container{
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap:10px;
+        .img-bin{
+            display: flex;
+            width: 160px;
+            height:160px;
+            overflow: hidden;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            img{
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+    
+        .no_image{
+            display: flex;
+            width: 160px;
+            height:160px;
+            overflow: hidden;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid grey;
+    
+        }
+        .line_info_container{
+            display: flex;
+            align-items:flex-start;
+            text-align: left;
+            flex-flow: column nowrap;
+            gap: 10px;
+            .line_info_3{
+                font-weight: 600;
+                font-size: 28px;
+            }
+            .line_info_1 {
+                font-size: 16px;
+            }
+            .line_info_2{
+                font-size: 18px;
+            }
+        }
+
+    }
+    .line_buttons{
+        margin-top: 10px;
+        gap:5px;
+        display: flex;
+        align-items: center;
+        flex-flow: column nowrap;
+        button{
+            width: 90px;
+            height:45px;
+        }
+    }
+
+}
+
+.img_prev{
+    display: flex;
+    width: 170px;
+    height:170px;
+    overflow: hidden;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    img{
+        object-fit: cover;
+        width: 100%;
+    }
+}
+
+@media(max-width: 768px) {
+    .line_content{
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        .product_info_container{
+            flex-flow: column nowrap;
+            .line_info_container{
+                align-items:center;
+                flex-flow: column nowrap;
+                .line_info_3{
+                    font-weight: 600;
+                    font-size: 32px;
+                }
+                .line_info_1 {
+                    font-size: 16px;
+                }
+                .line_info_2{
+                    font-size: 24px;
+                }
+            }
+    
+        }
+        .line_buttons{
+            flex-flow: row nowrap;
+            button{
+                width: 90px;
+                height:45px;
+            }
+        }
+    }
+}
+
+.img-bin {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    label {
+        margin: 0 10px;
+        cursor: pointer;
+        user-select: none;
+        position: absolute;
+        background-color: rgb(69, 69, 69);
+        font-size: 12px;
+        width: 24px;
+        height: 24px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        top: 5px;
+        left: -5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        z-index: 10;
+    }
+    [type=checkbox] {
+        display: none;
+    }
+    img {
+        height: auto;
+        width: 150px;
+        display: block;
+        position: relative;
+        z-index: 5;
+    }
+    [type=checkbox]:checked~img {
+        opacity: 0.3;
+    }
+}
+.form-selection{
+    margin-bottom: 10px;
+}
+.order_inputs_container{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    div{
+        padding: 10px 0;
+    }
+}
+
+.comment-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .line_text_only{
+        display: flex;
+        align-items: center;
+        flex-flow: column nowrap;
+        div{
+            text-align: center;
+            font-size: 10px;
+        }
+    }
+    .line_buttons{
+        margin-top: 10px;
+        gap:5px;
+        display: flex;
+        align-items: center;
+        flex-flow: column nowrap;
+        button{
+            width: 90px;
+            height:45px;
+        }
+        div{
+            text-align: center;
+            font-size: 10px;
+        }
+    }
+}
+@media(max-width: 768px) {
+    .comment-container{
+        flex-flow: column nowrap;
+        .line_buttons{
+            flex-flow: row nowrap;
+        }
+    }
+}
