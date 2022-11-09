@@ -23,15 +23,16 @@ function Edit() {
   };
 
   const { setEditData, modalData, setModalData, containers } = useContext(DezesContext);
-
+  console.log(container);
   const edit = () => {  
     setEditData({
       name,
-      weight,
+      weight: weight * 1,
       image: photoPrint,
       flamable: flamable ? 1 : 0,
       expiration: expiration ? 1 : 0,
-      container_id: JSON.parse(container).id
+      container_id: container * 1,
+      id: modalData.id
     });
     setModalData(null);
     setDeletePhoto(false);
@@ -98,7 +99,7 @@ function Edit() {
               type="Checkbox"
               checked={flamable}
               value={flamable}
-              onClick={() => setFlamable(e => !e)}
+              onChange={() => setFlamable(e => !e)}
             />
           </div>
           <div>
@@ -107,7 +108,7 @@ function Edit() {
               type="Checkbox"
               checked={expiration}
               value={expiration}
-              onClick={() => setExpiration(e => !e)}
+              onChange={() => setExpiration(e => !e)}
             />
           </div>
         </div>
@@ -121,7 +122,7 @@ function Edit() {
               Choose from list
             </option>
             {containers?.map((g) => (
-              <option key={g.id} value={JSON.stringify(g)}>
+              <option key={g.id} value={g.id}>
                 {g.special_id}
               </option>
             ))}

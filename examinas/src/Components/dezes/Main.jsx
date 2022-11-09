@@ -16,6 +16,7 @@ const Main = () => {
   const [createData, setCreateData] = useState(null);
   const [dezes, setDezes] = useState(null);
   const [containers, setContainers] = useState(null);
+  const [containersList, setContainersList] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
@@ -30,7 +31,14 @@ const Main = () => {
   useEffect(() => {
       axios.get('http://localhost:3003/server/containers', authConfig())
           .then(res => {
+            console.log(res.data)
               setContainers(res.data);
+          })
+  }, [lastUpdate]);
+  useEffect(() => {
+      axios.get('http://localhost:3003/server/containers/list', authConfig())
+          .then(res => {
+              setContainersList(res.data);
           })
   }, [lastUpdate]);
 
@@ -38,6 +46,11 @@ const Main = () => {
       if (null === createData) {
           return;
       }
+      console.log(createData)
+      axios.put('http://localhost:3003/server/container/' + createData.container_id, createData.container_id,  authConfig())
+      .then(res => {
+          setLastUpdate(Date.now());
+      });
       axios.post('http://localhost:3003/server/dezes', createData, authConfig())
           .then(res => {
               setLastUpdate(Date.now());
@@ -58,11 +71,13 @@ const Main = () => {
       if (null === editData) {
           return;
       }
+        console.log(editData.id);
       axios.put('http://localhost:3003/server/dezes/' + editData.id, editData, authConfig())
           .then(res => {
               setLastUpdate(Date.now());
           });
   }, [editData]);
+console.log(modalData);
 
   return (
     <DezesContext.Provider value={{
@@ -72,6 +87,7 @@ const Main = () => {
       setEditData,
       modalData,
       containers,
+      containersList,
       setModalData
     }}>
             <div className="container">

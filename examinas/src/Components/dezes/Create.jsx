@@ -3,7 +3,6 @@ import DezesContext from "../../Contexts/DezesContext";
 import getBase64 from "../../Functions/getBase64";
 
 function Create() {
-  const [type, setType] = useState("0");
   const [name, setName] = useState("");
   const [weight, setWeight] = useState(0);
   const [container, setContainer] = useState(0);
@@ -11,7 +10,7 @@ function Create() {
   const [expiration, setExpiration] = useState(false);
   const fileInput = useRef();
 
-  const { setCreateData, containers } = useContext(DezesContext);
+  const { setCreateData, containersList } = useContext(DezesContext);
 
   const [photoPrint, setPhotoPrint] = useState(null);
 
@@ -24,6 +23,7 @@ function Create() {
   };
 
   const add = () => {
+    console.log(JSON.parse(container).id);
     setCreateData({
       name,
       weight,
@@ -37,7 +37,7 @@ function Create() {
     setPhotoPrint(null);
     fileInput.current.value = null;
     setFlamable(false);
-    setContainer('')
+    setContainer(0)
     setExpiration(false);
 };
 
@@ -72,7 +72,7 @@ function Create() {
               type="Checkbox"
               checked={flamable}
               value={flamable}
-              onClick={() => setFlamable(e => !e)}
+              onChange={() => setFlamable(e => !e)}
             />
           </div>
           <div>
@@ -81,7 +81,7 @@ function Create() {
               type="Checkbox"
               checked={expiration}
               value={expiration}
-              onClick={() => setExpiration(e => !e)}
+              onChange={() => setExpiration(e => !e)}
             />
           </div>
         </div>
@@ -94,7 +94,7 @@ function Create() {
             <option value={0} disabled>
               Choose from list
             </option>
-            {containers?.map((g) => (
+            {containersList?.map((g) => (
               <option key={g.id} value={JSON.stringify(g)}>
                 {g.special_id}
               </option>

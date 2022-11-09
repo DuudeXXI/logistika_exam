@@ -3,7 +3,8 @@ import DezesContext from "../../Contexts/DezesContext";
 import types from "../../Data/types";
 function Line({ deze }) {
   const { setDeleteData, setModalData, containers } = useContext(DezesContext);
-
+console.log(containers)
+console.log(deze)
   return (
     <li className="list-group-item">
       <div className="line_content">
@@ -21,7 +22,7 @@ function Line({ deze }) {
             <div className="line_info_1">Weight: <strong>{deze.weight}</strong> kg</div>
             <div className="line_info_2">Flamable: {deze.flamable ? "Yes" : "No"}</div>
             <div className="line_info_2">Low expiration: {deze.expiration ? "Yes" : "No"}</div>
-            <div className="line_info_1">Assigned container Special code: {containers?.find(x => x.id === deze.container_id).special_id}</div>
+            <div className="line_info_1">Assigned container Special code: {containers?.find(x => x.id === deze.container_id) ? containers?.find(x => x.id === deze.container_id).special_id : null}</div>
           </div>
         </div>
         <div className="line_buttons">
