@@ -20,7 +20,7 @@ const Main = () => {
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
-
+  console.log(editData);
   // READ for list
   useEffect(() => {
       axios.get('http://localhost:3003/server/dezes', authConfig())

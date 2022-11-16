@@ -243,6 +243,17 @@ app.put("/server/dezes/:id", (req, res) => {
         res.send(result);
     });
 });
+app.put("/server/containers/:id", (req, res) => {
+    const sql = `
+    UPDATE konteineriai
+    SET type = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.type, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 app.put("/server/container/:id", (req, res) => {
     const sql = `
     UPDATE konteineriai

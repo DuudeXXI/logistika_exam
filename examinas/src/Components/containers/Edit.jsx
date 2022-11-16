@@ -1,17 +1,16 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import ContainersContext from "../../Contexts/ContainersContext";
-import sizes from "../../Data/types";
+import types from "../../Data/types";
 
 function Edit() {
-  const [size, setSize] = useState("");
-  const [special, setSpecial] = useState("");
+  const [type, setType] = useState("0");
 
   const { setEditData, modalData, setModalData } = useContext(ContainersContext);
 
   const edit = () => {
     setEditData({
-      size,
-      special
+      type,
+      id: modalData.id
     });
     setModalData(null);
   };
@@ -20,8 +19,7 @@ function Edit() {
     if (null === modalData) {
       return;
     }
-    setSize(modalData.size);
-    setSpecial(modalData.special);
+    setType(modalData.type);
   }, [modalData]);
 
   if (null === modalData) {
@@ -46,33 +44,22 @@ function Edit() {
           <div className="modal-body"></div>
           <div className="card m-4">
             <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">Type</label>
-                <input
-                  maxLength={50}
-                  type="text"
-                  className="form-control"
-                  value={size}
-                  onChange={(e) => setSize(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Size</label>
-                <select
-                  className="form-select"
-                  value={size}
-                  onChange={(e) => setSize(e.target.value)}
-                >
-                  <option value={0} disabled>
-                    Choose from list
+            <div className="mb-3">
+              <label className="form-label">Type</label>
+              <select
+                className="form-select"
+                value={type}
+                onChange={(e) => setType(e.target.value)}>
+                <option value={0} disabled>
+                  Choose from list
+                </option>
+                {types?.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.type}
                   </option>
-                  {sizes.map((g) => (
-                    <option key={g.id} value={g.id}>
-                      {g.type}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                ))}
+              </select>
+            </div>
               <button
                 onClick={edit}
                 type="button"

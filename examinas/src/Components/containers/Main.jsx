@@ -14,19 +14,12 @@ const Main = () => {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [createData, setCreateData] = useState(null);
-  const [dezes, setDezes] = useState(null);
   const [containers, setContainers] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
-
+console.log(editData);
   // READ for list
-  useEffect(() => {
-      axios.get('http://localhost:3003/server/dezes', authConfig())
-          .then(res => {
-              setDezes(res.data);
-          })
-  }, [lastUpdate]);
   useEffect(() => {
       axios.get('http://localhost:3003/server/containers', authConfig())
           .then(res => {
@@ -68,7 +61,6 @@ const Main = () => {
   return (
     <ContainersContext.Provider value={{
       setCreateData,
-      dezes,
       setDeleteData,
       setEditData,
       modalData,
