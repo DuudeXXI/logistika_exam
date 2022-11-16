@@ -22,10 +22,12 @@ const Main = () => {
           })
   }, [lastUpdate]);
   useEffect(() => {
+    if (null === containers) {
+      return;
+    }
       axios.get('http://localhost:3003/home/containers', authConfig())
           .then(res => {
               setContainers(res.data);
-              console.log(res.data);
           })
   }, [lastUpdate]);
 

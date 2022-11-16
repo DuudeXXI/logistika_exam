@@ -23,7 +23,6 @@ function Edit() {
   };
 
   const { setEditData, modalData, setModalData, containers } = useContext(DezesContext);
-  console.log(container);
   const edit = () => {  
     setEditData({
       name,

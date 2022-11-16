@@ -4,6 +4,7 @@ import types from "../../Data/types";
 
 function Line({ container }) {
   const { setDeleteData, setModalData } = useContext(ContainersContext);
+
   return (
     <li className="list-group-item">
       <div className="line_content">
@@ -11,6 +12,11 @@ function Line({ container }) {
           <div className="line_info_container">
             <div className="line_info_2">Container Code: <strong>{container.special_id}</strong></div>
             <div className="line_info_2">Container size: {types.find(c => c.id === (container.type * 1))?.type}</div>
+            <div className="line_info_1">Boxes inside: <strong>{container.boxes_inside} / 
+            {container.type * 1 === 1 ? "2" :
+             container.type * 1 === 2 ? "4" :
+             container.type * 1 === 3 ? "6" :
+             "Err"}</strong></div>
           </div>
         </div>
         <div className="line_buttons">

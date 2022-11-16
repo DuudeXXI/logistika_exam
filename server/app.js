@@ -188,8 +188,10 @@ app.get("/server/containers/list", (req, res) => {
 });
 app.get("/home/dezes", (req, res) => {
     const sql = `
-    SELECT *
-    FROM boxes
+    SELECT konteineriai.*, boxes.*
+    FROM konteineriai
+    LEFT JOIN boxes
+    ON boxes.container_id = konteineriai.id
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -245,6 +247,19 @@ app.put("/server/container/:id", (req, res) => {
     const sql = `
     UPDATE konteineriai
     SET boxes_inside = boxes_inside + 1
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+app.put("/server/container/delete/:id", (req, res) => {
+    const sql = `
+    
+    UPDATE konteineriai
+    SET boxes_inside = CASE WHEN boxes_inside > 0 THEN boxes_inside - 1 ELSE 0
+    END
     WHERE id = ?
     `;
     con.query(sql, [req.params.id], (err, result) => {

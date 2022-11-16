@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import DezesContext from "../../Contexts/DezesContext";
 import DataContext from "../../Contexts/DataContext";
 import axios from 'axios';
-import { authConfig } from '../../Functions/auth';
+import { authConfig, login } from '../../Functions/auth';
 import Create from './Create'
 import List from './List'
 import Edit from "./Edit";
@@ -31,7 +31,6 @@ const Main = () => {
   useEffect(() => {
       axios.get('http://localhost:3003/server/containers', authConfig())
           .then(res => {
-            console.log(res.data)
               setContainers(res.data);
           })
   }, [lastUpdate]);
@@ -44,9 +43,8 @@ const Main = () => {
 
   useEffect(() => {
       if (null === createData) {
-          return;
-      }
-      console.log(createData)
+        return;
+    }
       axios.put('http://localhost:3003/server/container/' + createData.container_id, createData.container_id,  authConfig())
       .then(res => {
           setLastUpdate(Date.now());
@@ -61,6 +59,10 @@ const Main = () => {
       if (null === deleteData) {
           return;
       }
+      axios.put('http://localhost:3003/server/container/delete/' + deleteData.container_id, deleteData.container_id,  authConfig())
+      .then(res => {
+          setLastUpdate(Date.now());
+      });
       axios.delete('http://localhost:3003/server/dezes/' + deleteData.id, authConfig())
           .then(res => {
               setLastUpdate(Date.now());
@@ -71,13 +73,11 @@ const Main = () => {
       if (null === editData) {
           return;
       }
-        console.log(editData.id);
       axios.put('http://localhost:3003/server/dezes/' + editData.id, editData, authConfig())
           .then(res => {
               setLastUpdate(Date.now());
           });
   }, [editData]);
-console.log(modalData);
 
   return (
     <DezesContext.Provider value={{

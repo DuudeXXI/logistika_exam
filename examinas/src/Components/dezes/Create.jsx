@@ -23,22 +23,31 @@ function Create() {
   };
 
   const add = () => {
-    console.log(JSON.parse(container).id);
-    setCreateData({
-      name,
-      weight,
-      image: photoPrint,
-      flamable: flamable ? 1 : 0,
-      expiration: expiration ? 1 : 0,
-      container_id: JSON.parse(container).id
-    });
-    setName("");
-    setWeight(0);
-    setPhotoPrint(null);
-    fileInput.current.value = null;
-    setFlamable(false);
-    setContainer(0)
-    setExpiration(false);
+    if (0 === container){
+      console.log("Please select container if available")
+      setName("");
+      setWeight(0);
+      setPhotoPrint(null);
+      fileInput.current.value = null;
+      setFlamable(false);
+      setExpiration(false);
+    } else {
+      setCreateData({
+        name,
+        weight,
+        image: photoPrint,
+        flamable: flamable ? 1 : 0,
+        expiration: expiration ? 1 : 0,
+        container_id: JSON.parse(container).id
+      });
+      setName("");
+      setWeight(0);
+      setPhotoPrint(null);
+      fileInput.current.value = null;
+      setFlamable(false);
+      setContainer(0)
+      setExpiration(false);
+    }
 };
 
   return (
@@ -92,7 +101,7 @@ function Create() {
             value={container}
             onChange={(e) => setContainer(e.target.value)}>
             <option value={0} disabled>
-              Choose from list
+              {containersList?.length === 0 ? "No containers available"  : "Choose from list"}
             </option>
             {containersList?.map((g) => (
               <option key={g.id} value={JSON.stringify(g)}>

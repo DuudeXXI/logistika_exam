@@ -3,8 +3,6 @@ import DezesContext from "../../Contexts/DezesContext";
 import types from "../../Data/types";
 function Line({ deze }) {
   const { setDeleteData, setModalData, containers } = useContext(DezesContext);
-console.log(containers)
-console.log(deze)
   return (
     <li className="list-group-item">
       <div className="line_content">
